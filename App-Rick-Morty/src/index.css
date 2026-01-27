@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;500;700;900&display=swap');
+
+:root {
+  /* Rick and Morty Color Palette */
+  --portal-green: #00ff41;
+  --portal-green-dark: #00cc34;
+  --electric-blue: #00d4ff;
+  --cosmic-purple: #9d4edd;
+  --space-dark: #0a0e27;
+  --space-darker: #050812;
+  --card-bg: rgba(15, 23, 42, 0.85);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--space-dark);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--space-darker);
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(10, 14, 39, 0.7) 0%, rgba(5, 8, 18, 0.9) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--portal-green);
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--electric-blue);
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+a {
+  font-weight: 500;
+  color: var(--electric-blue);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--portal-green);
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
+}
+
+button {
+  border-radius: 12px;
+  border: 2px solid var(--portal-green);
+  padding: 0.75em 1.5em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
+  color: var(--portal-green);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  border-color: var(--portal-green);
+  background: linear-gradient(135deg, rgba(0, 255, 65, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.4), 0 0 40px rgba(0, 255, 65, 0.2);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+input {
+  border-radius: 8px;
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  padding: 0.75em 1em;
+  font-size: 1em;
+  font-family: 'Inter', sans-serif;
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--portal-green);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Global Layout Patterns for Cards */
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  padding: 1rem 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 24px;
+  border: 2px dashed rgba(0, 255, 65, 0.2);
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--space-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--portal-green) 0%, var(--electric-blue) 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--portal-green);
+}
