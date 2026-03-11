@@ -45,12 +45,8 @@
 }
 
 .cards-section {
-    margin-bottom: 4rem;
-}
-
-.cards-section h2 {
-    margin-bottom: 1.5rem;
-    padding-left: 1rem;
+    margin-bottom: 0;
+    overflow: hidden; /* 👈 evita que cards salgan del section */
 }
 
 /* Infinite Carousel Styles */
@@ -141,4 +137,75 @@
     .carousel-track {
         animation-duration: 30s;
     }
+}
+
+.carousel-section {
+    scroll-snap-align: start;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.cards-page {
+    height: calc(100vh - 80px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+}
+
+/* ── Typography: Get Schwifty theme ── */
+.section-header h1 {
+    font-family: 'Get Schwifty', cursive;
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-shadow:
+        0 0 20px rgba(0, 255, 65, 0.8),
+        0 0 40px rgba(0, 255, 65, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    font-family: 'Get Schwifty', cursive;
+    font-size: 1.1rem;
+    color: rgba(0, 212, 255, 0.8);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+    letter-spacing: 0.05em;
+}
+
+.cards-section h2,
+.carousel-section h2 {
+    font-family: 'Get Schwifty', cursive;
+    font-size: 1.8rem;
+    color: #00d4ff;
+    text-shadow:
+        0 0 15px rgba(0, 212, 255, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.05em;
+}
+
+.filter-buttons button {
+    font-family: 'Get Schwifty', cursive;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    padding: 0.6rem 1.5rem;
+    background: transparent;
+    border-color: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.filter-buttons button.active {
+    background: linear-gradient(135deg, rgba(0, 255, 65, 0.15) 0%, rgba(0, 212, 255, 0.15) 100%);
+    border-color: var(--portal-green);
+    color: var(--portal-green);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
+.load-btn {
+    font-family: 'Get Schwifty', cursive;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
 }

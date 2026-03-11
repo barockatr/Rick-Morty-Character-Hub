@@ -2,12 +2,12 @@ import SearchBar from "../searchBar/SearchBar";
 import { NavLink } from "react-router-dom";
 import "./Nav.css";
 
-export default function Nav({ onSearch, logout }) {
+export default function Nav({ onSearch, logout, filter, setFilter, onLoadRandom }) {
   return (
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-logo">
-          <h2>Rick & Morty</h2>
+          <img src="/rick-morty-logo.png" alt="Rick & Morty" />
           <span className="portal-icon">🌀</span>
         </div>
 
@@ -21,6 +21,25 @@ export default function Nav({ onSearch, logout }) {
           <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             About
           </NavLink>
+        </div>
+
+        {/* Filtros en navbar */}
+        <div className="nav-filters">
+           <button
+              onClick={() => setFilter('all')}
+              className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+           >All</button>
+           <button
+              onClick={() => setFilter('human')}
+              className={`filter-btn ${filter === 'human' ? 'active' : ''}`}
+           >Humans</button>
+           <button
+              onClick={() => setFilter('alien')}
+              className={`filter-btn ${filter === 'alien' ? 'active' : ''}`}
+           >Aliens</button>
+           <button onClick={onLoadRandom} className="random-btn" title="Load Random">
+              🌍<span className="random-question">?</span>
+           </button>
         </div>
 
         <div className="nav-actions">

@@ -18,6 +18,17 @@ function App() {
 
    const navigate = useNavigate();
    const [access, setAccess] = useState(false);
+   const [filter, setFilter] = useState('all');
+   const [randomCharacters, setRandomCharacters] = useState([]);
+
+   const loadRandomCharacters = async () => {
+      const randomIds = Array.from({ length: 12 }, () => Math.floor(Math.random() * 826) + 1);
+      const promises = randomIds.map(id =>
+         axios(`https://rickandmortyapi.com/api/character/${id}`).catch(() => null)
+      );
+      const results = await Promise.all(promises);
+      setRandomCharacters(results.filter(r => r?.data).map(r => r.data));
+   };
 
    function login(userData) {
       const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -44,6 +55,12 @@ function App() {
          navigate('/');
       }
    }, [access, navigate]);
+
+   useEffect(() => {
+      if (access) {
+         loadRandomCharacters();
+      }
+   }, [access]);
 
    const location = useLocation();
    console.log(location.pathname);
@@ -104,7 +121,15 @@ function App() {
    return (
       <div className='App'>
          {
-            location.pathname !== "/" && <Nav onSearch={onSearch} logout={logout} />
+            location.pathname !== "/" && (
+               <Nav
+                  onSearch={onSearch}
+                  logout={logout}
+                  filter={filter}
+                  setFilter={setFilter}
+                  onLoadRandom={loadRandomCharacters}
+               />
+            )
          }
          <Routes >
             <Route
@@ -113,7 +138,15 @@ function App() {
             />
             <Route
                path="/home"
-               element={<Cards characters={characters} onClose={onClose} onCardClick={handleCardClick} />}
+               element={
+                  <Cards
+                     characters={characters}
+                     onClose={onClose}
+                     onCardClick={handleCardClick}
+                     filter={filter}
+                     randomCharacters={randomCharacters}
+                  />
+               }
             />
             <Route
                path="/about"

@@ -43,6 +43,8 @@ body {
   background-position: center;
   background-attachment: fixed;
   position: relative;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body::before {

@@ -2,21 +2,23 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 2px solid rgba(0, 255, 65, 0.2);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(5, 8, 18, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 255, 65, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(0, 255, 65, 0.1);
 }
 
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
+    gap: 1rem;
+    flex-wrap: nowrap; /* 👈 evita que se rompa en dos líneas */
 }
 
 .nav-logo {
@@ -25,60 +27,57 @@
     gap: 0.5rem;
 }
 
-.nav-logo h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    background: linear-gradient(135deg, var(--portal-green) 0%, var(--electric-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.nav-logo img {
+    height: 38px; /* 👈 un poco más pequeño para ganar espacio */
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+    transition: filter 0.3s ease;
+}
+
+.nav-logo img:hover {
+    filter: drop-shadow(0 0 16px rgba(0, 212, 255, 0.9));
 }
 
 .portal-icon {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     animation: rotate 4s linear infinite;
 }
 
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
 
 .nav-links {
     display: flex;
-    gap: 0.5rem;
-    flex: 1;
+    gap: 0.25rem;
+    flex: 0; /* 👈 que no crezca innecesariamente */
     justify-content: center;
 }
 
 .nav-link {
-    padding: 0.6rem 1.5rem;
+    padding: 0.5rem 1rem; /* 👈 reducir padding para ganar espacio */
     border-radius: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-family: 'Get Schwifty', cursive;
     font-size: 0.9rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
-    color: var(--text-secondary);
+    border: 1px solid transparent;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: none;
 }
 
 .nav-link:hover {
     color: var(--portal-green);
-    background: rgba(0, 255, 65, 0.1);
-    border-color: rgba(0, 255, 65, 0.3);
+    background: rgba(0, 255, 65, 0.08);
+    border-color: rgba(0, 255, 65, 0.25);
 }
 
 .nav-link.active {
     color: var(--portal-green);
-    background: rgba(0, 255, 65, 0.15);
-    border-color: var(--portal-green);
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+    background: rgba(0, 255, 65, 0.12);
+    border-color: rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
 }
 
 .nav-actions {
@@ -88,17 +87,21 @@
 }
 
 .logout-btn {
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 1.2rem;
+    font-family: 'Get Schwifty', cursive;
     font-size: 0.9rem;
-    background: linear-gradient(135deg, rgba(255, 68, 68, 0.2) 0%, rgba(255, 107, 107, 0.2) 100%);
-    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.4);
     color: #ff6b6b;
+    border-radius: 8px;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
 }
 
 .logout-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 68, 68, 0.3) 0%, rgba(255, 107, 107, 0.3) 100%);
+    background: rgba(255, 68, 68, 0.2);
     border-color: #ff6b6b;
-    box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -107,20 +110,94 @@
         gap: 1rem;
         padding: 1rem;
     }
-
     .nav-links {
         width: 100%;
         justify-content: space-around;
     }
-
     .nav-link {
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
     }
-
     .nav-actions {
         width: 100%;
         justify-content: center;
         flex-wrap: wrap;
     }
+}
+
+/* ── Estilos para Filtros y Botón Random en Navbar ── */
+.nav-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(5, 8, 18, 0.35);
+    backdrop-filter: blur(8px);
+    padding: 0.3rem 0.4rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 65, 0.12);
+    flex-shrink: 0; /* 👈 que no se comprima */
+}
+
+.filter-btn {
+    padding: 0.35rem 0.75rem; /* 👈 más compacto */
+    font-family: 'Get Schwifty', cursive;
+    font-size: 0.8rem;
+    background: transparent;
+    border: 1px solid transparent;
+    color: rgba(255, 255, 255, 0.45);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    color: var(--portal-green);
+    background: rgba(0, 255, 65, 0.08);
+}
+
+.filter-btn.active {
+    color: var(--portal-green);
+    background: rgba(0, 255, 65, 0.12);
+    border-color: rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+.random-btn {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.random-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: #00d4ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+    transform: rotate(20deg) scale(1.1);
+}
+
+.random-question {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 0.65rem;
+    font-family: 'Get Schwifty', cursive;
+    color: #00d4ff;
+    background: rgba(5, 8, 18, 0.9);
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 212, 255, 0.4);
 }

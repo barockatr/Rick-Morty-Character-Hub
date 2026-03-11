@@ -3,23 +3,7 @@ import axios from 'axios';
 import Card from '../card/Card.jsx';
 import './Cards.css';
 
-export default function Cards({ characters, onClose, onCardClick }) {
-   const [filter, setFilter] = useState('all');
-   const [randomCharacters, setRandomCharacters] = useState([]);
-
-   useEffect(() => {
-      loadRandomCharacters();
-   }, []);
-
-   const loadRandomCharacters = async () => {
-      const randomIds = Array.from({ length: 12 }, () => Math.floor(Math.random() * 826) + 1);
-      const promises = randomIds.map(id =>
-         axios(`https://rickandmortyapi.com/api/character/${id}`).catch(() => null)
-      );
-      const results = await Promise.all(promises);
-      setRandomCharacters(results.filter(r => r?.data).map(r => r.data));
-   };
-
+export default function Cards({ characters, onClose, onCardClick, filter, randomCharacters }) {
    const allCharacters = [...characters, ...randomCharacters];
    const uniqueCharacters = allCharacters.filter((char, index, self) =>
       index === self.findIndex(c => c.id === char.id)
@@ -36,55 +20,25 @@ export default function Cards({ characters, onClose, onCardClick }) {
 
    return (
       <div className="page-container cards-page">
-         <div className="section-header cards-header">
-            <h1>Character Gallery</h1>
-            <p className="section-subtitle">Explore the multiverse of Rick and Morty</p>
-
-            <div className="controls">
-               <div className="filter-buttons">
-                  <button
-                     onClick={() => setFilter('all')}
-                     className={filter === 'all' ? 'active' : ''}
-                  >
-                     All
-                  </button>
-                  <button
-                     onClick={() => setFilter('human')}
-                     className={filter === 'human' ? 'active' : ''}
-                  >
-                     Humans
-                  </button>
-                  <button
-                     onClick={() => setFilter('alien')}
-                     className={filter === 'alien' ? 'active' : ''}
-                  >
-                     Aliens
-                  </button>
-               </div>
-               <button onClick={loadRandomCharacters} className="load-btn">
-                  🎲 Load Random
-               </button>
-            </div>
-         </div>
-
          {filteredCharacters.length > 0 && (
-            <section className="cards-section">
-               <h2>All Characters</h2>
-               <div className="cards-grid">
-                  {filteredCharacters.map((character, index) => (
-                     <Card
-                        id={character.id}
-                        key={`${character.id}-${index}`}
-                        name={character.name}
-                        status={character.status}
-                        species={character.species}
-                        gender={character.gender}
-                        origin={character.origin.name}
-                        image={character.image}
-                        onClose={() => onClose(character.id)}
-                        onClick={() => onCardClick(character)}
-                     />
-                  ))}
+            <section className="carousel-section">
+               <div className="infinite-carousel">
+                  <div className="carousel-track">
+                     {[...filteredCharacters, ...filteredCharacters].map((character, index) => (
+                        <Card
+                           id={character.id}
+                           key={`all-${character.id}-${index}`}
+                           name={character.name}
+                           status={character.status}
+                           species={character.species}
+                           gender={character.gender}
+                           origin={character.origin.name}
+                           image={character.image}
+                           onClose={() => onClose(character.id)}
+                           onClick={() => onCardClick(character)}
+                        />
+                     ))}
+                  </div>
                </div>
             </section>
          )}

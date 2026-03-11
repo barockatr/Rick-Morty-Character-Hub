@@ -1,47 +1,187 @@
+/* Base container — borde animado según status */
 .container {
     position: relative;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(0, 255, 65, 0.3);
+    width: 100%;
+    margin: 0.5rem;
     border-radius: 20px;
-    padding: 1.25rem;
-    margin: 1rem;
-    width: 280px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(0, 255, 65, 0.1);
-    animation: fadeInUp 0.5s ease-out;
     overflow: hidden;
     cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: fadeInUp 0.5s ease-out;
+    background: rgba(10, 14, 39, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    height: calc(100vh - 120px); /* fila ocupa toda la altura visible */
 }
 
+/* Borde animado según status */
+.alive {
+    border: 1px solid rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.15),
+                inset 0 0 15px rgba(0, 255, 65, 0.03);
+    animation: fadeInUp 0.5s ease-out, glowAlive 3s ease-in-out infinite;
+}
+
+.dead {
+    border: 1px solid rgba(255, 68, 68, 0.4);
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.15),
+                inset 0 0 15px rgba(255, 68, 68, 0.03);
+    animation: fadeInUp 0.5s ease-out, glowDead 3s ease-in-out infinite;
+}
+
+.unknown {
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    box-shadow: 0 0 15px rgba(148, 163, 184, 0.1);
+}
+
+@keyframes glowAlive {
+    0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 65, 0.15), inset 0 0 15px rgba(0, 255, 65, 0.03); }
+    50%       { box-shadow: 0 0 30px rgba(0, 255, 65, 0.35), inset 0 0 20px rgba(0, 255, 65, 0.08); }
+}
+
+@keyframes glowDead {
+    0%, 100% { box-shadow: 0 0 15px rgba(255, 68, 68, 0.15); }
+    50%       { box-shadow: 0 0 30px rgba(255, 68, 68, 0.35); }
+}
+
+/* Hover */
 .container:hover {
-    transform: translateY(-10px) scale(1.05);
-    /* Sobresalir y aumentar tamaño */
-    border-color: var(--portal-green);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
-        0 0 40px rgba(0, 255, 65, 0.4),
-        0 0 60px rgba(0, 212, 255, 0.2);
+    transform: translateY(-4px) scale(1.01); /* 👈 más sutil, menos invasivo */
     z-index: 10;
 }
 
-.buttonContainer {
+/* Imagen full card */
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    overflow: hidden;
+}
+
+.imageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.container:hover .imageWrapper img {
+    transform: scale(1.08);
+}
+
+/* Gradiente sobre imagen */
+.imageOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(5, 8, 18, 0.7) 70%,
+        rgba(5, 8, 18, 0.95) 100%
+    );
+    pointer-events: none;
+}
+
+/* Scanlines — aparecen en hover */
+.scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 65, 0.03) 2px,
+        rgba(0, 255, 65, 0.03) 4px
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.container:hover .scanlines {
+    opacity: 1;
+    animation: scanMove 8s linear infinite;
+}
+
+@keyframes scanMove {
+    from { background-position: 0 0; }
+    to   { background-position: 0 100px; }
+}
+
+/* Status badge */
+.statusBadge {
     position: absolute;
     top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-family: 'Get Schwifty', cursive;
+    letter-spacing: 0.05em;
+    z-index: 3;
+    backdrop-filter: blur(8px);
+    white-space: nowrap;
+}
+
+.statusBadge.alive {
+    background: rgba(0, 255, 65, 0.15);
+    border: 1px solid rgba(0, 255, 65, 0.4);
+    color: #00ff41;
+    box-shadow: none;
+    animation: none;
+}
+
+.statusBadge.dead {
+    background: rgba(255, 68, 68, 0.15);
+    border: 1px solid rgba(255, 68, 68, 0.4);
+    color: #ff4444;
+    box-shadow: none;
+    animation: none;
+}
+
+.statusBadge.unknown {
+    background: rgba(148, 163, 184, 0.15);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    color: #94a3b8;
+    box-shadow: none;
+}
+
+.statusDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.alive .statusDot  { background: #00ff41; box-shadow: 0 0 6px #00ff41; }
+.dead .statusDot   { background: #ff4444; box-shadow: 0 0 6px #ff4444; }
+.unknown .statusDot { background: #94a3b8; }
+
+/* Botones */
+.buttonContainer {
+    position: absolute;
+    top: 0.75rem;
     left: 0;
     right: 0;
     display: flex;
     justify-content: space-between;
-    padding: 0 1rem;
+    padding: 0 0.75rem;
     z-index: 5;
 }
 
 .container button {
-    padding: 0.5rem;
-    font-size: 1.2rem;
-    min-width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    padding: 0.4rem;
+    font-size: 1rem;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,83 +189,82 @@
 }
 
 .favBtn {
-    background: rgba(15, 23, 42, 0.8);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(10, 14, 39, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .favBtn:hover {
-    transform: scale(1.1);
-    background: rgba(15, 23, 42, 0.9);
+    transform: scale(1.15);
+    border-color: rgba(255, 100, 100, 0.5);
 }
 
 .closeBtn {
-    background: rgba(255, 68, 68, 0.15) !important;
-    border-color: #ff4444 !important;
+    background: rgba(255, 68, 68, 0.1) !important;
+    border: 1px solid rgba(255, 68, 68, 0.4) !important;
     color: #ff4444 !important;
+    backdrop-filter: blur(8px);
 }
 
 .closeBtn:hover {
-    background: #ff4444 !important;
+    background: rgba(255, 68, 68, 0.8) !important;
     color: white !important;
 }
 
+/* Info */
 .cardContent {
     display: flex;
     flex-direction: column;
-}
-
-.container img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 12px;
-    transition: all 0.5s ease;
-    border: 2px solid rgba(0, 212, 255, 0.2);
-}
-
-.container:hover img {
-    border-color: var(--electric-blue);
-    transform: scale(1.02);
+    height: 100%;
 }
 
 .cardInfo {
-    margin-top: 1rem;
+    padding: 0.75rem 1rem 1rem;
+    flex: 1;
 }
 
 .cardInfo h2 {
-    margin: 0.5rem 0;
-    font-size: 1.3rem;
-    color: var(--portal-green);
-    text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    font-family: 'Get Schwifty', cursive;
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 1px 3px rgba(0,0,0,0.8);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.6rem;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem 0.75rem;
+}
+
+.infoItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.infoLabel {
+    font-size: 0.65rem;
+    color: rgba(0, 212, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'Get Schwifty', cursive;
+}
+
+.infoValue {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.8);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.cardInfo h4 {
-    margin: 0.25rem 0;
-    color: var(--text-secondary);
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.originText {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--electric-blue);
-    opacity: 0.8;
-}
-
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 640px) {

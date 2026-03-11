@@ -36,25 +36,50 @@ function Card(props) {
    }
 
    return (
-      <div className={styles.container} >
+      <div className={`${styles.container} ${styles[props.status?.toLowerCase().replace(' ', '')]}`}>
          <div className={styles.buttonContainer}>
-            {
-               isFav ? (
-                  <button onClick={handleFavorite} className={styles.favBtn}>❤️</button>
-               ) : (
-                  <button onClick={handleFavorite} className={styles.favBtn}>🤍</button>
-               )
-            }
+            <button onClick={handleFavorite} className={styles.favBtn}>
+               {isFav ? '❤️' : '🤍'}
+            </button>
             <button onClick={props.onClose} className={styles.closeBtn}>X</button>
          </div>
 
+         {/* Badge de status */}
+         <div className={`${styles.statusBadge} ${styles[props.status?.toLowerCase().replace(' ', '')]}`}>
+            <span className={styles.statusDot}></span>
+            {props.status}
+         </div>
+
          <div className={styles.cardContent} onClick={handleCardClick}>
-            <img src={props.image} alt={props.name} />
+            {/* Imagen full con gradiente encima */}
+            <div className={styles.imageWrapper}>
+               <img src={props.image} alt={props.name} />
+               <div className={styles.imageOverlay}></div>
+               {/* Scanlines */}
+               <div className={styles.scanlines}></div>
+            </div>
+
+            {/* Info flotando sobre imagen */}
             <div className={styles.cardInfo}>
                <h2>{props.name}</h2>
-               <h4>{props.status} - {props.species}</h4>
-               <h4>{props.gender}</h4>
-               <p className={styles.originText}>{props.origin}</p>
+               <div className={styles.infoGrid}>
+                  <div className={styles.infoItem}>
+                     <span className={styles.infoLabel}>Species</span>
+                     <span className={styles.infoValue}>{props.species}</span>
+                  </div>
+                  <div className={styles.infoItem}>
+                     <span className={styles.infoLabel}>Gender</span>
+                     <span className={styles.infoValue}>{props.gender}</span>
+                  </div>
+                  <div className={styles.infoItem}>
+                     <span className={styles.infoLabel}>Origin</span>
+                     <span className={styles.infoValue}>{props.origin}</span>
+                  </div>
+                  <div className={styles.infoItem}>
+                     <span className={styles.infoLabel}>Type</span>
+                     <span className={styles.infoValue}>{props.type || 'Unknown'}</span>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
