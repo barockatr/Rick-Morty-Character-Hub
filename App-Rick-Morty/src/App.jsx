@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import About from './components/about/About';
 import Cards from './components/cards/Cards.jsx';
 import Detail from './components/detail/Detail';
 import Favorites from './components/favorites/Favorites';
@@ -146,10 +145,6 @@ function App() {
                }
             />
             <Route
-               path="/about"
-               element={<About />}
-            />
-            <Route
                path="/detail/:id"
                element={<Detail />}
             />
@@ -159,7 +154,18 @@ function App() {
             />
             <Route
                path="*"
-               element={<About />}
+               element={
+                  <Cards
+                     characters={characters}
+                     onClose={onClose}
+                     onCardClick={handleCardClick}
+                     filter={filter}
+                     randomCharacters={randomCharacters}
+                     setFilter={setFilter}
+                     onLoadRandom={loadRandomCharacters}
+                     logout={logout}
+                  />
+               }
             />
          </Routes>
 

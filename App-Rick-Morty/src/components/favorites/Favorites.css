@@ -1,5 +1,26 @@
 .favorites-page {
-    min-height: 70vh;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+}
+
+.fav-header {
+    padding: 0 1rem;
+    flex-shrink: 0;
+    margin-bottom: 0.5rem;
+}
+
+.fav-subtitle {
+    font-family: 'Get Schwifty', cursive;
+    font-size: 0.85rem;
+    color: rgba(0, 212, 255, 0.5);
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+    padding-left: 0.25rem;
+}
+
+.carousel-track.no-anim {
+    animation: none;
+    justify-content: center;
 }
 
 .hint {

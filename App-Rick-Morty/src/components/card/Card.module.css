@@ -244,6 +244,7 @@
     text-overflow: ellipsis;
     margin-bottom: 0.5rem;
     letter-spacing: 0.04em;
+    text-align: center;
 }
 
 .infoGrid {
@@ -257,6 +258,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0 0.1rem;
+    animation: infoFloat 3s ease-in-out infinite;
 }
 
 .infoLabel {
@@ -314,4 +316,14 @@
         max-width: 300px;
         margin: 1rem auto;
     }
+}
+
+.infoItem:nth-child(1) { animation-delay: 0s; }
+.infoItem:nth-child(2) { animation-delay: 0.3s; }
+.infoItem:nth-child(3) { animation-delay: 0.6s; }
+.infoItem:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes infoFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-3px); }
 }

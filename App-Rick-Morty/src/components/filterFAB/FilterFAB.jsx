@@ -23,9 +23,6 @@ export default function FilterFAB({ filter, setFilter, onLoadRandom, logout }) {
             <button onClick={() => navigate('/favorites')} className="fab-option fab-nav">
                💚 <span>FAVORITES</span>
             </button>
-            <button onClick={() => navigate('/about')} className="fab-option fab-nav">
-               📡 <span>ABOUT</span>
-            </button>
             <div className="fab-divider" />
             <button onClick={logout} className="fab-option fab-logout">
                🌀 <span>ESCAPE</span>
