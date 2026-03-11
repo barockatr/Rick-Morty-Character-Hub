@@ -12,14 +12,17 @@ export default function Nav({ onSearch, logout, filter, setFilter, onLoadRandom 
         </div>
 
         <div className="nav-links">
-          <NavLink to="/home" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Home
+          <NavLink to="/home" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} title="Home">
+            <span className="nav-icon">🧪</span>
+            <span className="nav-tooltip">Home</span>
           </NavLink>
-          <NavLink to="/favorites" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Favorites
+          <NavLink to="/favorites" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} title="Favorites">
+            <span className="nav-icon">💚</span>
+            <span className="nav-tooltip">Favorites</span>
           </NavLink>
-          <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            About
+          <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} title="About">
+            <span className="nav-icon">📡</span>
+            <span className="nav-tooltip">About</span>
           </NavLink>
         </div>
 
@@ -45,8 +48,9 @@ export default function Nav({ onSearch, logout, filter, setFilter, onLoadRandom 
         <div className="nav-actions">
           <SearchBar onSearch={onSearch} />
           {logout && (
-            <button onClick={logout} className="logout-btn">
-              Logout
+            <button onClick={logout} className="logout-btn" title="Escape this dimension">
+              <span className="ship-icon">🛸</span>
+              <span className="ship-trail"></span>
             </button>
           )}
         </div>

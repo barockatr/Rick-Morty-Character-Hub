@@ -1,4 +1,54 @@
 .App {
   width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Planeta flotante */
+.App::before {
+  content: '';
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  left: -60px;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(157, 78, 221, 0.4) 0%,
+    rgba(0, 212, 255, 0.2) 40%,
+    rgba(5, 8, 18, 0.8) 70%,
+    transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 60px rgba(157, 78, 221, 0.3),
+    inset 0 0 40px rgba(0, 212, 255, 0.1);
+  animation: floatPlanet 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Estrella fugaz */
+.App::after {
+  content: '';
+  position: fixed;
+  width: 2px;
+  height: 80px;
+  top: 20%;
+  right: 15%;
+  background: linear-gradient(180deg, transparent, #00ff41, transparent);
+  animation: shootingStar 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+}
+
+@keyframes floatPlanet {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes shootingStar {
+  0% { opacity: 0; transform: translateY(-100px) translateX(0) rotate(45deg); }
+  10% { opacity: 1; }
+  30% { opacity: 0; transform: translateY(200px) translateX(-100px) rotate(45deg); }
+  100% { opacity: 0; }
 }

@@ -146,6 +146,15 @@
     flex-direction: column;
     justify-content: center;
     margin-bottom: 0;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.infinite-carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 1rem 0;
 }
 
 .cards-page {
@@ -153,6 +162,10 @@
     overflow-y: scroll;
     overflow-x: hidden;
     scroll-snap-type: y mandatory;
+    scrollbar-gutter: stable;
+    margin-right: 0;
+    width: 100%;
+    padding: 0;
 }
 
 /* ── Typography: Get Schwifty theme ── */

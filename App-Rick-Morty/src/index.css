@@ -38,9 +38,19 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background: var(--space-darker);
-  background-image: url('/background.png');
+  background-image: 
+    radial-gradient(2px 2px at 10% 15%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(2px 2px at 25% 40%, rgba(0,255,65,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 55% 60%, rgba(0,212,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(2px 2px at 80% 70%, rgba(157,78,221,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 80%, rgba(0,255,65,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 60% 85%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 55%, rgba(0,212,255,0.5) 0%, transparent 100%),
+    linear-gradient(180deg, #050812 0%, #0a0e27 50%, #050812 100%);
   background-size: cover;
-  background-position: center;
   background-attachment: fixed;
   position: relative;
   overflow-x: hidden;
@@ -226,7 +236,7 @@ input::placeholder {
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {

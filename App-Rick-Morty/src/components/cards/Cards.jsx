@@ -19,7 +19,7 @@ export default function Cards({ characters, onClose, onCardClick, filter, random
    const alienCharacters = uniqueCharacters.filter(c => c.species !== 'Human').slice(0, 6);
 
    return (
-      <div className="page-container cards-page">
+      <div className="cards-page">
          {filteredCharacters.length > 0 && (
             <section className="carousel-section">
                <div className="infinite-carousel">

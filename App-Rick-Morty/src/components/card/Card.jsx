@@ -64,19 +64,31 @@ function Card(props) {
                <h2>{props.name}</h2>
                <div className={styles.infoGrid}>
                   <div className={styles.infoItem}>
-                     <span className={styles.infoLabel}>Species</span>
+                     <span className={styles.infoLabel}>
+                        <span className={styles.infoIcon}>🧬</span>Species
+                     </span>
+                     <span className={styles.infoDivider}>·</span>
                      <span className={styles.infoValue}>{props.species}</span>
                   </div>
                   <div className={styles.infoItem}>
-                     <span className={styles.infoLabel}>Gender</span>
+                     <span className={styles.infoLabel}>
+                        <span className={styles.infoIcon}>{props.gender === 'Female' ? '♀️' : props.gender === 'Male' ? '♂️' : '⚧️'}</span>Gender
+                     </span>
+                     <span className={styles.infoDivider}>·</span>
                      <span className={styles.infoValue}>{props.gender}</span>
                   </div>
                   <div className={styles.infoItem}>
-                     <span className={styles.infoLabel}>Origin</span>
+                     <span className={styles.infoLabel}>
+                        <span className={styles.infoIcon}>🌍</span>Origin
+                     </span>
+                     <span className={styles.infoDivider}>·</span>
                      <span className={styles.infoValue}>{props.origin}</span>
                   </div>
                   <div className={styles.infoItem}>
-                     <span className={styles.infoLabel}>Type</span>
+                     <span className={styles.infoLabel}>
+                        <span className={styles.infoIcon}>⚡</span>Type
+                     </span>
+                     <span className={styles.infoDivider}>·</span>
                      <span className={styles.infoValue}>{props.type || 'Unknown'}</span>
                   </div>
                </div>
