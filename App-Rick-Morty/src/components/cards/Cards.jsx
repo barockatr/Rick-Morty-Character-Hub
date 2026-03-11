@@ -1,9 +1,33 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useRef, useEffect, useState } from 'react';
 import Card from '../card/Card.jsx';
+import FilterFAB from '../filterFAB/FilterFAB.jsx';
 import './Cards.css';
 
-export default function Cards({ characters, onClose, onCardClick, filter, randomCharacters }) {
+function WaveTitle({ text }) {
+   return (
+      <h2 className="wave-title">
+         {text.split('').map((char, i) => (
+            <span key={i} className="wave-letter" style={{ animationDelay: `${i * 0.06}s` }}>
+               {char === ' ' ? '\u00A0' : char}
+            </span>
+         ))}
+      </h2>
+   );
+}
+
+export default function Cards({ characters, onClose, onCardClick, filter, randomCharacters, setFilter, onLoadRandom, logout }) {
+   const firstSectionRef = useRef(null);
+   const [showFAB, setShowFAB] = useState(true);
+
+   useEffect(() => {
+      const observer = new IntersectionObserver(
+         ([entry]) => setShowFAB(entry.isIntersecting),
+         { threshold: 0.1 }
+      );
+      if (firstSectionRef.current) observer.observe(firstSectionRef.current);
+      return () => observer.disconnect();
+   }, []);
+
    const allCharacters = [...characters, ...randomCharacters];
    const uniqueCharacters = allCharacters.filter((char, index, self) =>
       index === self.findIndex(c => c.id === char.id)
@@ -21,7 +45,7 @@ export default function Cards({ characters, onClose, onCardClick, filter, random
    return (
       <div className="cards-page">
          {filteredCharacters.length > 0 && (
-            <section className="carousel-section">
+            <section className="carousel-section" ref={firstSectionRef}>
                <div className="infinite-carousel">
                   <div className="carousel-track">
                      {[...filteredCharacters, ...filteredCharacters].map((character, index) => (
@@ -40,12 +64,20 @@ export default function Cards({ characters, onClose, onCardClick, filter, random
                      ))}
                   </div>
                </div>
+               {showFAB && (
+                  <FilterFAB
+                     filter={filter}
+                     setFilter={setFilter}
+                     onLoadRandom={onLoadRandom}
+                     logout={logout}
+                  />
+               )}
             </section>
          )}
 
          {humanCharacters.length > 0 && (
             <section className="carousel-section">
-               <h2>🧑 Human Characters</h2>
+               <WaveTitle text="Human Characters" />
                <div className="infinite-carousel">
                   <div className="carousel-track">
                      {[...humanCharacters, ...humanCharacters].map((character, index) => (
@@ -69,7 +101,7 @@ export default function Cards({ characters, onClose, onCardClick, filter, random
 
          {alienCharacters.length > 0 && (
             <section className="carousel-section">
-               <h2>👽 Alien Characters</h2>
+               <WaveTitle text="Alien Characters" />
                <div className="infinite-carousel">
                   <div className="carousel-track carousel-reverse">
                      {[...alienCharacters, ...alienCharacters].map((character, index) => (

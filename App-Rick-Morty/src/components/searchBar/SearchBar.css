@@ -1,60 +1,59 @@
 .search-bar {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(5, 8, 18, 0.4);
+    gap: 0.3rem;
+    background: rgba(5, 8, 18, 0.3);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 0.3rem;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 255, 65, 0.15);
+    padding: 0.2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 65, 0.1);
     transition: all 0.3s ease;
 }
 
 .search-bar:focus-within {
-    border-color: rgba(0, 255, 65, 0.4);
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+    border-color: rgba(0, 255, 65, 0.35);
+    box-shadow: 0 0 12px rgba(0, 255, 65, 0.15);
 }
 
 .search-select {
-    background: rgba(0, 255, 65, 0.08);
-    border: 1px solid rgba(0, 255, 65, 0.25);
-    border-radius: 6px;
-    padding: 0.5rem;
-    color: var(--portal-green);
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(0, 255, 65, 0.15);
+    border-radius: 0;
+    padding: 0.3rem 0.4rem;
+    color: rgba(0, 255, 65, 0.7);
     font-family: 'Get Schwifty', cursive;
-    font-size: 0.85rem;
+    font-size: 0.72rem;
     cursor: pointer;
     transition: all 0.3s ease;
     outline: none;
 }
 
 .search-select:hover {
-    background: rgba(0, 255, 65, 0.15);
-    border-color: var(--portal-green);
+    color: var(--portal-green);
 }
 
 .search-select option {
     background: var(--space-dark);
     color: var(--text-primary);
-    font-family: sans-serif; /* options no soportan custom fonts */
+    font-family: sans-serif;
 }
 
 .search-input {
     background: transparent;
     border: none;
-    padding: 0.5rem 0.75rem;
-    color: #ffffff;
+    padding: 0.3rem 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
     font-family: 'Get Schwifty', cursive;
-    font-size: 0.85rem;
-    width: 180px;
-    flex: 1;
+    font-size: 0.75rem;
+    width: 140px;
     outline: none;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
 }
 
 .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.2);
     font-family: 'Get Schwifty', cursive;
 }
 
@@ -65,27 +64,25 @@
 }
 
 .search-btn {
-    padding: 0.5rem 0.75rem;
-    font-size: 1.2rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
     min-width: auto;
-    border-radius: 8px;
-    background: rgba(0, 255, 65, 0.1);
-    border: 1px solid rgba(0, 255, 65, 0.25);
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: rgba(0, 255, 65, 0.6);
     transition: all 0.3s ease;
 }
 
 .search-btn:hover {
-    background: rgba(0, 255, 65, 0.2);
-    border-color: var(--portal-green);
-    box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+    background: rgba(0, 255, 65, 0.1);
+    color: var(--portal-green);
+    box-shadow: none;
+    transform: none;
 }
 
 @media (max-width: 640px) {
     .search-input {
-        width: 120px;
-    }
-    .search-select {
-        font-size: 0.75rem;
-        padding: 0.4rem;
+        width: 100px;
     }
 }

@@ -122,13 +122,7 @@ function App() {
       <div className='App'>
          {
             location.pathname !== "/" && (
-               <Nav
-                  onSearch={onSearch}
-                  logout={logout}
-                  filter={filter}
-                  setFilter={setFilter}
-                  onLoadRandom={loadRandomCharacters}
-               />
+               <Nav onSearch={onSearch} />
             )
          }
          <Routes >
@@ -145,6 +139,9 @@ function App() {
                      onCardClick={handleCardClick}
                      filter={filter}
                      randomCharacters={randomCharacters}
+                     setFilter={setFilter}
+                     onLoadRandom={loadRandomCharacters}
+                     logout={logout}
                   />
                }
             />
@@ -172,7 +169,6 @@ function App() {
                onClose={handleCloseModal}
             />
          )}
-
       </div>
    );
 }

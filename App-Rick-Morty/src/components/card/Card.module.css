@@ -11,7 +11,7 @@
     background: rgba(10, 14, 39, 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    height: calc(100vh - 120px); /* fila ocupa toda la altura visible */
+    height: calc(100vh - 180px);
 }
 
 /* Borde animado según status */

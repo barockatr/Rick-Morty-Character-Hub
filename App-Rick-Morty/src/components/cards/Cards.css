@@ -48,16 +48,22 @@
     margin-bottom: 0;
     overflow: hidden; /* 👈 evita que cards salgan del section */
 }
-
 /* Infinite Carousel Styles */
 .carousel-section {
-    margin-bottom: 4rem;
-    overflow: hidden;
+    scroll-snap-align: start;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem 1rem 0.5rem;
+    margin-bottom: 0;
+    width: 100%;
 }
 
 .carousel-section h2 {
-    margin-bottom: 1.5rem;
-    padding-left: 1rem;
+    flex-shrink: 0;
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
 }
 
 .infinite-carousel {
@@ -65,6 +71,9 @@
     overflow: hidden;
     position: relative;
     padding: 1rem 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .infinite-carousel::before,
@@ -139,23 +148,7 @@
     }
 }
 
-.carousel-section {
-    scroll-snap-align: start;
-    height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 0;
-    width: 100%;
-    padding: 0 1rem;
-}
 
-.infinite-carousel {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 1rem 0;
-}
 
 .cards-page {
     height: calc(100vh - 80px);
@@ -189,16 +182,6 @@
 }
 
 .cards-section h2,
-.carousel-section h2 {
-    font-family: 'Get Schwifty', cursive;
-    font-size: 1.8rem;
-    color: #00d4ff;
-    text-shadow:
-        0 0 15px rgba(0, 212, 255, 0.6),
-        0 2px 4px rgba(0, 0, 0, 0.8);
-    letter-spacing: 0.05em;
-}
-
 .filter-buttons button {
     font-family: 'Get Schwifty', cursive;
     font-size: 0.95rem;
@@ -221,4 +204,36 @@
     font-family: 'Get Schwifty', cursive;
     font-size: 0.95rem;
     letter-spacing: 0.08em;
+}
+
+.wave-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.1rem;
+    padding-left: 0.5rem;
+    flex-shrink: 0;
+    margin-bottom: 0.75rem;
+    overflow: visible;
+}
+
+.wave-letter {
+    display: inline-block;
+    font-family: 'Get Schwifty', cursive;
+    font-size: 1.8rem;
+    color: #00d4ff;
+    text-shadow:
+        0 0 15px rgba(0, 212, 255, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.8);
+    animation: letterFloat 2.5s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+@keyframes letterFloat {
+    0%, 100% { transform: translateY(0px) rotate(-1deg); }
+    50%       { transform: translateY(-6px) rotate(1deg); }
+}
+
+@keyframes iconSway {
+    0%, 100% { transform: rotate(-8deg); }
+    50%       { transform: rotate(8deg); }
 }
