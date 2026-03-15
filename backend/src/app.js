@@ -6,7 +6,7 @@ app.use(cors({
     origin: [
         'http://localhost:5173',
         'https://rick-morty-character-hub.vercel.app',
-        /\.vercel\.app$/
+        'https://rick-morty-character-hub-ez9tgqbms.vercel.app'
     ],
     credentials: true
 }));
