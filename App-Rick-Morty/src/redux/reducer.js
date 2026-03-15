@@ -1,26 +1,27 @@
-import { ADD_FAV, REMOVE_FAV } from "./action-types";
+import { ADD_FAV, REMOVE_FAV, SET_FAVS } from "./action-types";
 
 const initialState = {
-    myFavorites: [], //* [ {rick}, {morty, id: 2}, {beth} ]
+    myFavorites: [],
     user: ""
-}
+};
 
-export default function reducer( state = initialState, {type, payload}) {
-    //* action = { type, payload }
-    // console.log(typeof payload)
+export default function reducer(state = initialState, { type, payload }) {
     switch (type) {
+        case SET_FAVS:
+            return { ...state, myFavorites: payload };
+
         case ADD_FAV:
-            return {
-                ...state,
-                myFavorites: [...state.myFavorites, payload]
-            }
+            const alreadyExists = state.myFavorites.some(fav => fav.id === payload.id);
+            if (alreadyExists) return state;
+            return { ...state, myFavorites: [...state.myFavorites, payload] };
+
         case REMOVE_FAV:
-            const filteredFavs = state.myFavorites.filter(fav => fav.id !== Number(payload))
             return {
                 ...state,
-                myFavorites: filteredFavs
-            }    
+                myFavorites: state.myFavorites.filter(fav => fav.id !== Number(payload))
+            };
+
         default:
-            return {...state}
+            return { ...state };
     }
-}
+}

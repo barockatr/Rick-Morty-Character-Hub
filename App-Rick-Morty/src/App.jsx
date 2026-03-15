@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchFavs } from './redux/actions';
 import axios from "axios";
 import Cards from './components/cards/Cards.jsx';
 import Detail from './components/detail/Detail';
@@ -16,6 +18,7 @@ function App() {
    const [isModalOpen, setIsModalOpen] = useState(false);
 
    const navigate = useNavigate();
+   const dispatch = useDispatch();
    const [access, setAccess] = useState(false);
    const [filter, setFilter] = useState('all');
    const [randomCharacters, setRandomCharacters] = useState([]);
@@ -30,25 +33,21 @@ function App() {
    };
 
    function login(userData) {
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find(u => u.email === userData.email && u.password === userData.password);
-
-      if (user) {
-         setAccess(true);
-         localStorage.setItem('currentUser', JSON.stringify(user));
-         navigate('/home');
-      }
+      setAccess(true);
+      navigate('/home');
    }
 
    function logout() {
       setAccess(false);
       localStorage.removeItem('currentUser');
+      localStorage.removeItem('token');
       navigate('/');
    }
 
    useEffect(() => {
       const currentUser = localStorage.getItem('currentUser');
-      if (currentUser) {
+      const token = localStorage.getItem('token');
+      if (currentUser && token) {
          setAccess(true);
       } else if (!access) {
          navigate('/');
@@ -58,6 +57,7 @@ function App() {
    useEffect(() => {
       if (access) {
          loadRandomCharacters();
+         dispatch(fetchFavs());
       }
    }, [access]);
 

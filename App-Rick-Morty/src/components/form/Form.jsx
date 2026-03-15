@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { authAPI } from '../../api/api';
 import validation from "./validation";
 import "./Form.css";
 
@@ -55,31 +56,29 @@ export default function Form(props) {
         setErrors(validation({ ...userData, [name]: value }));
     };
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         if (isRegister) {
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userExists = users.find(u => u.email === userData.email);
-            if (userExists) {
-                alert("Este email ya está registrado. Por favor inicia sesión.");
-                return;
+            try {
+                await authAPI.register(userData);
+                alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
+                setIsRegister(false);
+                setUserData({ email: "", password: "" });
+            } catch (error) {
+                const msg = error.response?.data?.message || 'Error al registrar';
+                alert(msg);
             }
-            users.push(userData);
-            localStorage.setItem('users', JSON.stringify(users));
-            alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
-            setIsRegister(false);
-            setUserData({ email: "", password: "" });
         } else {
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const user = users.find(u => u.email === userData.email && u.password === userData.password);
-            if (user) {
-                // Disparar animación de entrada al portal
+            try {
+                const { data } = await authAPI.login(userData);
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('currentUser', JSON.stringify(data.user));
                 setIsPortalEntry(true);
                 setTimeout(() => {
-                    props.login(userData);
-                }, 1000); // Espera que termine la animación
-            } else {
+                    props.login(data.user);
+                }, 1000);
+            } catch (error) {
                 alert("Credenciales incorrectas. Si no tienes cuenta, regístrate.");
             }
         }
