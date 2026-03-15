@@ -3,7 +3,11 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: [
+        'http://localhost:5173',
+        'https://rick-morty-character-hub.vercel.app',
+        /\.vercel\.app$/
+    ],
     credentials: true
 }));
 app.use(express.json());
