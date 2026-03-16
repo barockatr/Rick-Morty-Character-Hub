@@ -3,10 +3,10 @@
 Una Aplicación Full-Stack de Alto Rendimiento diseñada para explorar el multiverso de Rick & Morty mediante búsqueda avanzada, autenticación real con JWT, gestión de favoritos persistida en la nube y una UI premium con estética neón/espacial en el ecosistema React moderno.
 
 <p align="center">
-  <img src="../Docs/Images/landing-page.png" alt="Landing Page de Rick & Morty Character Hub" width="800">
+  <img src="Docs/Images/landing-page.png" alt="Landing Page de Rick & Morty Character Hub" width="800">
 </p>
 <p align="center">
-  <img src="../Docs/Images/home-page.png" alt="Vista principal mostrando la galería de personajes" width="800">
+  <img src="Docs/Images/home-page.png" alt="Vista principal mostrando la galería de personajes" width="800">
 </p>
 
 🚀 **Despliegue (Live Demo)**
@@ -24,7 +24,7 @@ Regístrate, inicia sesión y guarda tus favoritos — persisten en la nube entr
 
 ## 🔐 Autenticación Real con JWT: Sistema de Identidad del Explorador
 <p align="center">
-  <img src="../Docs/Images/auth-login.png" alt="Pantalla de Login y Registro del sistema de autenticación" width="800">
+  <img src="Docs/Images/auth-login.png" alt="Pantalla de Login y Registro del sistema de autenticación" width="800">
 </p>
 
 El punto de entrada de la aplicación es su sistema de autenticación real con JWT, construido sobre un backend Node/Express con base de datos MongoDB en la nube.
@@ -51,7 +51,7 @@ Para gestionar la colección de favoritos del usuario a través de múltiples ru
 
 ## ✨ High-Fidelity UX/UI & Features
 <p align="center">
-  <img src="../Docs/Images/character-gallery.png" alt="Galería de personajes con glassmorphism y estética neón" width="800">
+  <img src="Docs/Images/character-gallery.png" alt="Galería de personajes con glassmorphism y estética neón" width="800">
 </p>
 
 *   **Glassmorphism & Estética Neón/Espacial:** UI 100% customizada con transparencias, `backdrop-filter`, bordes luminosos y paleta de colores psicodélica inspirada en el universo del show.
@@ -61,7 +61,7 @@ Para gestionar la colección de favoritos del usuario a través de múltiples ru
 *   **Gestión de Favoritos:** Colección persistente en MongoDB con opción de agregar/remover personajes desde la galería o desde el detalle — disponible en cualquier sesión y dispositivo.
 
 <p align="center">
-  <img src="../Docs/Images/character-detail.png" alt="Vista de detalle expandida de un personaje con su información completa" width="800">
+  <img src="Docs/Images/character-detail.png" alt="Vista de detalle expandida de un personaje con su información completa" width="800">
 </p>
 
 ---
@@ -138,4 +138,3 @@ La aplicación estará disponible en `http://localhost:5173` 🚀
 **Nota:** La app consume la Rick and Morty API pública para los personajes. Para auth y favoritos requiere el backend corriendo con MongoDB Atlas configurado.
 
 Desarrollado para demostrar dominio de arquitecturas Full-Stack modernas: React + Redux en el cliente, Node/Express + JWT en el servidor, y MongoDB Atlas como capa de persistencia en la nube.
-strar dominio de arquitecturas Full-Stack modernas: React + Redux en el cliente, Node/Express + JWT en el servidor, y MongoDB Atlas como capa de persistencia en la nube.
